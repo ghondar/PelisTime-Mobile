@@ -18,22 +18,21 @@ class DetailVideo extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, detailStore, location } = this.props
+    const { dispatch, detailStore, json } = this.props
 
-    if(!detailStore[ location.id ])
-      dispatch(videoActions.fetchDetail(location.id))
+    if(!detailStore[ json.id ])
+      dispatch(videoActions.fetchDetail(json.id))
   }
 
   render() {
-    const { id, image, title } = this.props.location
-    const { name, plot, duration, rating, type, year, genre, sources, Loading } = this.props.detailStore[ id ] || { Loading : true }
+    const { id, image, title } = this.props.json
+    const details = this.props.detailStore[ id ] || { Loading : true }
 
     return (
       <Description
         url={image}
         title={title}
-        loading={Loading}
-        synopsis={plot} />
+        {...details} />
     )
   }
 }
