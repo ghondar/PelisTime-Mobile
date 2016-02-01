@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
-    "setup_project": "npm run step1; npm run step2",
+    "clear": "npm run step1; npm run step2",
     "step1": "rm -rf node_modules/react-native/node_modules/react; rm -rf node_modules/react-native/node_modules/fbjs; rm -rf node_modules/react/node_modules/fbjs",
     "step2": "cd node_modules; find . -name .babelrc | grep -v packager | xargs rm"
   },
@@ -12,11 +12,11 @@
     "fbjs": "^0.6.1",
     "q": "^1.4.1",
     "react": "^0.14.6",
-    "react-native": "^0.18.0",
-    "react-native-material-design": "^0.3.1",
+    "react-native": "0.18.1",
+    "react-native-material-design": "ghondar/react-native-material-design",
     "react-redux": "^4.0.6",
     "redux": "^3.0.5",
     "redux-thunk": "^1.0.3",
-    "superagent": "^1.6.1"
+    "superagent": "^1.7.2"
   }
 }
