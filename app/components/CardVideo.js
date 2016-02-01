@@ -1,6 +1,7 @@
 'use strict'
 
 import React, {
+  PropTypes,
   Component,
   StyleSheet,
   Text,
@@ -41,7 +42,9 @@ export default class CardVideo extends Component {
 
   _handleDetails(e) {
     const { video } = this.props
-    this.props.navigator.push({
+    const { navigator } = this.context
+
+    navigator.forward('detail', null, {
       id  : 2,
       json: {
         id   : video.id,
@@ -50,4 +53,8 @@ export default class CardVideo extends Component {
       }
     })
   }
+}
+
+CardVideo.contextTypes = {
+  navigator: PropTypes.object.isRequired
 }
