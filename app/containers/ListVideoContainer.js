@@ -20,9 +20,9 @@ class ListVideoContainer extends Component{
   }
 
   componentDidMount() {
-    const { dispatch, viewStore } = this.props
+    const { dispatch, viewStore, videoStore } = this.props
     const actions = bindActionCreators(videoActions, dispatch)
-    if(viewStore.view !== 'search')
+    if(viewStore.view !== 'search' && !videoStore[ viewStore.view ])
       actions.fetchVideos(viewStore.view, 1)
   }
 
