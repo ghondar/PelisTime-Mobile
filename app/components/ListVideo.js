@@ -42,9 +42,9 @@ export default class RowVideos extends Component {
       if(!loading && (currentPage < lastPage)) {
         this.setState({ load: true })
         if(viewStore.view === 'search') {
-          fetchVideosSearch(videoStore[ viewStore.view ].words, currentPage + 1)
+          fetchVideosSearch(videoStore[ viewStore.type + viewStore.view ].words, currentPage + 1)
         }else {
-          fetchVideos(viewStore.view, currentPage + 1)
+          fetchVideos(viewStore, currentPage + 1)
         }
       }
     }

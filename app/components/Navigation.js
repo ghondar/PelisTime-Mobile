@@ -1,17 +1,43 @@
 import React, { Component, PropTypes, View, Text, Image } from 'react-native'
 import { Avatar, Drawer, Divider, COLOR, TYPO } from 'react-native-material-design'
 
-const types = [
-  {
-    key  : 'releases',
-    title: 'Estrenos',
-    icon : 'home'
-  }, {
-    key  : 'popular',
-    title: 'Popular',
-    icon : 'face'
-  }
-]
+const sections = {
+  movies : [
+    {
+      title: 'Estrenos',
+      view : 'releases'
+    }, {
+      title: 'Popular',
+      view : 'popular'
+    }, {
+      title: 'Ranking',
+      view : 'ranking'
+    }, {
+      title: 'Todos',
+      view : 'all'
+    }
+  ],
+  tvshows: [
+    {
+      title: 'Nuevos Episodios',
+      view : 'newepisodes'
+    }, {
+      title: 'Popular',
+      view : 'popular'
+    }, {
+      title: 'Ranking',
+      view : 'ranking'
+    }, {
+      title: 'Todos',
+      view : 'all'
+    }
+  ]
+}
+
+const alias = {
+  movies : 'Peliculas',
+  tvshows: 'Series'
+}
 
 export default class Navigation extends Component {
 
@@ -35,16 +61,6 @@ export default class Navigation extends Component {
     render() {
       const { route } = this.state
 
-      const lista = types.map((type, index) => ({
-        icon   : type.icon,
-        value  : type.title,
-        active : index == 0 ? !route || route === type.key : route === type.key,
-        onPress: this._handleChangeView.bind(this, {
-          title: type.title,
-          view : type.key
-        })
-      }))
-
       return (
         <Drawer theme='light'>
           <Drawer.Header image={<Image source={require('./../img/nav.jpg')} />}>
@@ -53,10 +69,19 @@ export default class Navigation extends Component {
               <Text style={[ styles.text, COLOR.paperGrey50, TYPO.paperFontHeadline ]}>PelisTime</Text>
             </View>
           </Drawer.Header>
-          <Drawer.Section
-            title='Filtros'
-            items={lista}
-          />
+          {Object.keys(sections).map((type, i) => (
+            <Drawer.Section
+              key={i}
+              title={alias[ type ]}
+              items={sections[ type ].map((section, index) => ({
+                value  : section.title,
+                active : index == 0 ? !route || route === type + section.view : route === type + section.view,
+                onPress: this._handleChangeView.bind(this, {
+                  ...section,
+                  type
+                })
+              }))}/>
+          ))}
           <Divider style={{ marginTop: 8 }} />
         </Drawer>
       )
@@ -67,11 +92,11 @@ export default class Navigation extends Component {
       const { setView, fetchVideos, videoStore } = this.props
       setView(json)
 
-      if(!videoStore[ json.view ]) {
-        fetchVideos(json.view, 1)
+      if(!videoStore[ json.type + json.view ]) {
+        fetchVideos(json, 1)
       }
       this.setState({
-        route: json.view
+        route: json.type + json.view
       })
 
       drawer.closeDrawer()

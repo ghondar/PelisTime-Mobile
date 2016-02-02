@@ -22,14 +22,14 @@ class ListVideoContainer extends Component{
   componentDidMount() {
     const { dispatch, viewStore, videoStore } = this.props
     const actions = bindActionCreators(videoActions, dispatch)
-    if(viewStore.view !== 'search' && !videoStore[ viewStore.view ])
-      actions.fetchVideos(viewStore.view, 1)
+    if(viewStore.view !== 'search' && !videoStore[ viewStore.type + viewStore.view ])
+      actions.fetchVideos(viewStore, 1)
   }
 
   render() {
     const { dispatch, videoStore, viewStore } = this.props
     const actions = bindActionCreators(videoActions, dispatch)
-    const stateVideos = videoStore[ viewStore.view ]
+    const stateVideos = videoStore[ viewStore.type + viewStore.view ]
     let data = {}
 
     if(stateVideos) {

@@ -1,12 +1,12 @@
 import Q from 'q'
 import request from 'superagent'
 
-const API_ROOT = 'http://api-ghondar.mod.bz'
+const API_ROOT = 'http://pelistime.xyz'
 
-export function fetchList(view, page) {
+export function fetchList(json, page) {
   var deferred = Q.defer()
   request
-    .get(`${API_ROOT}/movies/${view}?page=${page}`)
+    .get(`${API_ROOT}/${json.type}/${json.view}?page=${page}`)
     .set('Accept', 'application/json')
     .end((err, res) => {
       if(err)
