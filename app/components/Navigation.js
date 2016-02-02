@@ -75,7 +75,7 @@ export default class Navigation extends Component {
               title={alias[ type ]}
               items={sections[ type ].map((section, index) => ({
                 value  : section.title,
-                active : index == 0 ? !route || route === type + section.view : route === type + section.view,
+                active : index == 0 && i == 0 ? !route || route === type + section.view : route === type + section.view,
                 onPress: this._handleChangeView.bind(this, {
                   ...section,
                   type
