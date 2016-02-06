@@ -1,7 +1,7 @@
 import Q from 'q'
 import request from 'superagent'
 
-const API_ROOT = 'http://pelistime.xyz'
+const API_ROOT = 'http://api-ghondar.mod.bz'
 
 export function fetchList(json, page) {
   var deferred = Q.defer()
