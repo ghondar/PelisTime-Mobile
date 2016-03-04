@@ -27,6 +27,7 @@ project.xcworkspace
 .idea
 .gradle
 local.properties
+android/app/app-release.apk
 
 # node.js
 #
