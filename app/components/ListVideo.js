@@ -27,10 +27,19 @@ const styles = StyleSheet.create({
 })
 
 export default class RowVideos extends Component {
+
   constructor(props, context) {
     super(props, context)
     this.state = {
       load: false
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { videos, loading, success } = nextProps
+
+    if(videos.length == 0 && loading && !success && this.refs.scrollbar) {
+      this.refs.scrollbar.scrollTo({ y: 0 })
     }
   }
 
@@ -62,6 +71,7 @@ export default class RowVideos extends Component {
     return (
       <PullToRefreshViewAndroid style={styles.layout} refreshing={this.state.load} enabled={false}>
         <ScrollView
+          ref='scrollbar'
           style={styles.scrollview}
           scrollEventThrottle={200}
           onContentSizeChange={this._onContentResize.bind(this)}
