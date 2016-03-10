@@ -9,7 +9,7 @@ Versión móvil de [PelisTime](https://github.com/ghondar/PelisTime) creado con 
 - [x] List
 - [x] Filters
 - [x] Series
-- [ ] Torrent download and streaming
+- [x] Torrent download and streaming
 - [ ] Player
 
 ## Setup
