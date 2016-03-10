@@ -15,22 +15,28 @@ import Description from '../components/Description'
 class DetailVideo extends Component {
   constructor(props, context) {
     super(props, context)
+    this.state = {
+      id: 0
+    }
   }
 
-  componentDidMount() {
-    const { dispatch, detailStore, json } = this.props
+  componentWillMount() {
+    const { dispatch, detailStore: { detail, state }, json } = this.props
 
-    if(!detailStore[ json.id ])
-      dispatch(videoActions.fetchDetail(json.id))
+    if(json) {
+      dispatch(videoActions.setDetailState(json))
+      if(!detail[ json.id ])
+        dispatch(videoActions.fetchDetail(json.id))
+    }
   }
 
   render() {
-    const { id, image, title } = this.props.json
-    const details = this.props.detailStore[ id ] || { Loading : true }
+    const { json, detailStore: { detail, state: { id, image, title } } } = this.props
+    const details = detail[ id ] || { Loading : true }
 
     return (
       <Description
-        url={image}
+        url={image || json.image}
         title={title}
         {...details} />
     )

@@ -1,8 +1,7 @@
+import { combineReducers } from 'redux'
 import * as ActionTypes from '../constants/ActionTypes'
 
-const initiState = {}
-
-export default function detailStore(state = initiState, action) {
+function detail(state = {}, action) {
   switch (action.type) {
     case ActionTypes.SET_DETAIL:
       return Object.assign({}, state, {
@@ -16,3 +15,23 @@ export default function detailStore(state = initiState, action) {
       return state
   }
 }
+
+const initialState = {
+  id   : 0,
+  image: '',
+  title: ''
+}
+
+function state(state = initialState, action) {
+  switch (action.type) {
+    case ActionTypes.SET_DETAIL_STATE:
+      return Object.assign({}, state, action.state)
+    default:
+      return state
+  }
+}
+
+export default combineReducers({
+  detail,
+  state
+})

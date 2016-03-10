@@ -7,5 +7,7 @@ export const CLEAR_VIDEOS = 'CLEAR_VIDEOS'
 export const SET_DETAIL = 'SET_DETAIL'
 export const LOADING_DETAIL = 'LOADING_DETAIL'
 
+export const SET_DETAIL_STATE = 'SET_DETAIL_STATE'
+
 // Types Actions
 export const SET_VIEW = 'SET_VIEW'

@@ -55,6 +55,7 @@ class Description extends Component {
                       primaryText={source.nombre ? source.nombre.split('.torrent')[ 0 ] : 'Desconocido'}
                       secondaryText={source.peso || 'Desconocido'}
                       captionText={source.def ? `${source.def}p` : 'Desconocido'}
+                      onPress={this._handleLoading.bind(this, source)}
                       leftIcon={<Icon
                                   style={{ marginTop: 13 }}
                                   name='play-circle-outline'
@@ -69,6 +70,21 @@ class Description extends Component {
       </ScrollView>
     )
   }
+
+  _handleLoading(source) {
+    const { navigator } = this.context
+
+    navigator.forward('loading', null, {
+      id  : 2,
+      json: {
+        ...source
+      }
+    })
+  }
+}
+
+Description.contextTypes = {
+  navigator: PropTypes.object.isRequired
 }
 
 Description.propTypes = {

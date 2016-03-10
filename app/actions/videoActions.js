@@ -1,4 +1,4 @@
-import { SET_VIDEOS, LOADING_VIDEOS, CLEAR_VIDEOS, SET_DETAIL, LOADING_DETAIL } from '../constants/ActionTypes'
+import { SET_VIDEOS, LOADING_VIDEOS, CLEAR_VIDEOS, SET_DETAIL, SET_DETAIL_STATE, LOADING_DETAIL } from '../constants/ActionTypes'
 import { fetchList, fetchDescription, fetchListSearch } from '../middleware/api'
 
 function setVideos(view, json) {
@@ -13,6 +13,13 @@ function setDetail(json) {
   return {
     type: SET_DETAIL,
     json
+  }
+}
+
+export function setDetailState(state) {
+  return {
+    type: SET_DETAIL_STATE,
+    state
   }
 }
 
