@@ -12,16 +12,10 @@ import { Toolbar } from 'react-native-material-design'
 export default class ToolbarAndroid extends Component {
   constructor(props, context) {
     super(props, context)
-    this.state = {
-      title  : 'Hola mundo',
-      theme  : 'blue',
-      counter: 0
-    }
   }
 
   render() {
     const { navigator } = this.context
-    const { theme, counter } = this.state
     const { onIconPress, viewStore } = this.props
 
     return (
