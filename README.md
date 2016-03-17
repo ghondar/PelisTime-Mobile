@@ -1,7 +1,7 @@
 # PelisTime-Mobile
 Versión móvil de [PelisTime](https://github.com/ghondar/PelisTime) creado con react-native, redux y react-native-material-design, basándome en el boilerplate [example-react-native-redux](https://github.com/alinz/example-react-native-redux).
 
-![](https://media.giphy.com/media/3o7ZeQZPpNGHSgyELe/giphy.gif)
+![](https://media.giphy.com/media/3osxYo1ZEwXhSE9xKw/giphy.gif)
 
 > This is a work in progress
 
