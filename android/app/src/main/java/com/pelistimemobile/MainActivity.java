@@ -4,10 +4,11 @@ import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 
-import com.ghondar.torrentstreamer.*;
-
 import java.util.Arrays;
 import java.util.List;
+
+import com.ghondar.torrentstreamer.TorrentStreamerPackage;
+import me.neo.react.StatusBarPackage;
 
 public class MainActivity extends ReactActivity {
 
@@ -37,7 +38,8 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
-            new TorrentStreamerPackage()
+            new TorrentStreamerPackage(),
+            new StatusBarPackage(this)
         );
     }
 }

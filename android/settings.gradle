@@ -4,3 +4,6 @@ include ':app'
 
 include ':react-native-torrent-streamer'
 project(':react-native-torrent-streamer').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-torrent-streamer/android/torrent')
+
+include ':react-native-android-statusbar'
+project(':react-native-android-statusbar').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-android-statusbar')
