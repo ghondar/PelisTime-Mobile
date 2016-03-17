@@ -1,126 +1,34 @@
-'use strict'
-
-import React, {
-  PropTypes,
-  StyleSheet,
-  Component,
-  View,
-  Text,
-  ScrollView,
-  DrawerLayoutAndroid,
-  Navigator
-} from 'react-native'
-import dimensions from 'Dimensions'
-import { Toolbar } from 'react-native-material-design'
-
-import Navigation from '../components/Navigation'
-import Navigate from '../utils/Navigate'
-import { bindActionCreators } from 'redux'
+import React, { Component, View, Navigator } from 'react-native'
+import { Router as configRouter, Route, Schema } from 'react-native-router-flux'
 import { connect } from 'react-redux'
 
-import * as viewActions from '../actions/viewActions'
-import * as videoActions from '../actions/videoActions'
+import Drawer from '../components/Drawer'
 
-import ToolbarAndroid from '../components/ToolbarAndroid'
+import Toolbar from '../components/ToolbarAndroid'
+import ListVideoContainer from '../containers/ListVideoContainer'
+import DetailVideo from '../containers/DetailVideo'
+import Loading from '../components/Loading'
 
-const SCREEN_WIDTH = dimensions.get('window').width
-const BaseConfig = Navigator.SceneConfigs.FloatFromRight
-const CustomLeftToRightGesture = Object.assign({}, BaseConfig.gestures.pop, {
-  snapVelocity: 8,
-  edgeHitWidth: SCREEN_WIDTH
-})
-const CustomSceneConfig = Object.assign({}, BaseConfig, {
-  springTension : 100,
-  springFriction: 1,
-  gesture       : {
-    pop: CustomLeftToRightGesture
-  }
-})
+const Router = connect()(configRouter)
 
-const styles = {
-  scene: {
-    flex     : 1,
-    marginTop: 56
-  }
-}
-
-class Route extends Component {
-
-  constructor(props, context) {
-    super(props, context)
-    this.state = {
-      drawer   : null,
-      navigator: null
-    }
-  }
-
-  getChildContext() {
-    return {
-      drawer   : this.state.drawer,
-      navigator: this.state.navigator
-    }
-  }
-
-  setDrawer(drawer) {
-    this.setState({
-      drawer
-    })
-  }
-
-  setNavigator(navigator) {
-    this.setState({
-      navigator: new Navigate(navigator)
-    })
-  }
-
+export default class Routes extends Component{
   render() {
-    const { viewStore, dispatch, videoStore } = this.props
-    const { drawer, navigator } = this.state
-
     return (
-      <DrawerLayoutAndroid
-        drawerWidth={300}
-        drawerPosition={DrawerLayoutAndroid.positions.Left}
-        renderNavigationView={() => {
-          if (drawer && navigator) {
-            return <Navigation
-                      videoStore= {videoStore}
-                      viewStore= {viewStore}
-                      {...bindActionCreators(viewActions, dispatch)}
-                      {...bindActionCreators(videoActions, dispatch)}/>
-          }
+      <Router hideNavBar={true} >
+        <Schema name='modal' sceneConfig={Navigator.SceneConfigs.FloatFromBottomAndroid}/>
+        <Schema name='default' sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
+        <Schema name='withoutAnimation'/>
 
-          return null
-        }}
-        ref={(drawer) => { !this.state.drawer ? this.setDrawer(drawer) : null }}>
-        {drawer &&
-        <Navigator
-          initialRoute={Navigate.getInitialRoute()}
-          navigationBar={<ToolbarAndroid viewStore= {viewStore} onIconPress={drawer.openDrawer} />}
-          configureScene={() => Navigator.SceneConfigs.FadeAndroid }
-          ref={(navigator) => { !this.state.navigator ? this.setNavigator(navigator) : null }}
-          renderScene={(route) => {
-            if (this.state.navigator && route.component) {
-              return (
-                <View
-                  style={styles.scene}
-                  showsVerticalScrollIndicator={false}>
-                  <route.component title={route.title} path={route.path} {...route.props} />
-                </View>
-              )
-            }
-          }}
-        />
-        }
-      </DrawerLayoutAndroid>
+        <Route name='principal' initial={true}>
+          <Drawer>
+            <Router header={Toolbar} hideNavBar={true}>
+              <Route name='listVideo' component={ListVideoContainer}/>
+              <Route name='detailVideo' component={DetailVideo}/>
+            </Router>
+          </Drawer>
+        </Route>
+        <Route name='loadingVideo' hideNavBar={true} component={Loading} type='modal' />
+      </Router>
     )
   }
 }
-
-Route.childContextTypes = {
-  drawer   : PropTypes.object,
-  navigator: PropTypes.object
-}
-
-export default connect(state => state)(Route)
-

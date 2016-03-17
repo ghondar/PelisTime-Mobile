@@ -1,11 +1,6 @@
-'use strict'
-
-import React, {
-  StyleSheet,
-  Component,
-  View,
-  Text
-} from 'react-native'
+import React, { StyleSheet, Component, Text } from 'react-native'
+import Modal from 'react-native-modalbox'
+import ProgressBar from 'ProgressBarAndroid'
 
 import RCTDeviceEventEmitter from 'RCTDeviceEventEmitter'
 import Subscribable from 'Subscribable'
@@ -16,7 +11,8 @@ class Loading extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
-      progress: ''
+      progress: 0,
+      title   : ''
     }
   }
 
@@ -41,33 +37,56 @@ class Loading extends Component {
   }
 
   onProgress(progress) {
-    console.log(progress)
-    this.setState({
-      progress: progress.data
-    })
+    if(progress.data != this.state.progress) {
+      this.setState({
+        progress: parseInt(progress.data) ? parseInt(progress.data) : 0,
+        title   : typeof progress.data === 'string' && progress.data
+      })
+    }
   }
 
   onReady(data) {
-    console.log(data)
     open(data.url, 'video/mp4')
   }
 
   onStop(data) {
-    console.log(data)
+    console.log('stop')
   }
 
   render() {
+    const { progress } = this.state
+
     return (
-      <View style={{
-                    flex          : 1,
-                    alignItems    : 'center',
-                    justifyContent: 'center'
-                  }}>
-        <Text>Progreso: {this.state.progress}</Text>
-      </View>
+      <Modal
+        animationDuration={200}
+        swipeThreshold={100}
+        style={styles.modal}
+        position={'center'}
+        isOpen={true}
+        backdropPressToClose={false}
+        position='center'>
+        <Text style={styles.text}>Cargando...</Text>
+        <ProgressBar styleAttr='Horizontal' style={styles.progress} indeterminate={progress == 0 ? true : false} progress={progress / 100} />
+      </Modal>
     )
   }
 }
 
-export default reactMixin.onClass(Loading, Subscribable.Mixin)
+const styles = StyleSheet.create({
+  modal   : {
+    justifyContent: 'center',
+    alignItems    : 'center',
+    borderRadius  : 5,
+    height        : 120,
+    width         : 200
+  },
+  progress: {
+    width: 160
+  },
+  text    : {
+    marginBottom: 10,
+    fontSize    : 15
+  }
+})
 
+export default reactMixin.onClass(Loading, Subscribable.Mixin)

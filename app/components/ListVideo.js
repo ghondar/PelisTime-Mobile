@@ -1,32 +1,12 @@
-'use strict'
-
-import React, {
-  Component,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  Image,
-  ScrollView,
-  PullToRefreshViewAndroid,
-  RefreshControl,
-  View
-} from 'react-native'
+import React, { Component, StyleSheet, Text, ScrollView, PullToRefreshViewAndroid } from 'react-native'
 import ProgressBar from 'ProgressBarAndroid'
+import { Actions } from 'react-native-router-flux'
 
 import { Card, COLOR, TYPO } from 'react-native-material-design'
 
 import CardVideo from './CardVideo'
 
-const styles = StyleSheet.create({
-  layout    : {
-    flex: 1
-  },
-  scrollview: {
-    flex: 1
-  }
-})
-
-export default class RowVideos extends Component {
+export default class ListVideo extends Component {
 
   constructor(props, context) {
     super(props, context)
@@ -77,7 +57,7 @@ export default class RowVideos extends Component {
           onContentSizeChange={this._onContentResize.bind(this)}
           onScroll={this._onScroll.bind(this)}
           showsVerticalScrollIndicator={false}>
-          {videos.map(video => <CardVideo video={video} key={video.id} navigator={navigator}/>)}
+          {videos.map(video => <CardVideo video={video} key={video.id} navigator={navigator} Actions={Actions}/>)}
           {videos.length == 0 && loading && !success ?
             <ProgressBar styleAttr='Inverse' /> :
             videos.length > 0 ? null : <Text>No se encontro videos...</Text>}
@@ -86,3 +66,12 @@ export default class RowVideos extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  layout    : {
+    flex     : 1
+  },
+  scrollview: {
+    flex: 1
+  }
+})

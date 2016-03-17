@@ -1,11 +1,4 @@
-'use strict'
-
-import React, {
-  StyleSheet,
-  Component,
-  View,
-  Text
-} from 'react-native'
+import React, { StyleSheet, Component } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as videoActions from '../actions/videoActions'
@@ -60,4 +53,3 @@ class ListVideoContainer extends Component{
 }
 
 export default connect(state => state)(ListVideoContainer)
-

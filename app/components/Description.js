@@ -1,25 +1,7 @@
-'use strict'
-
-import React, {
-  StyleSheet,
-  Component,
-  PropTypes,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  Text
-} from 'react-native'
+import React, { StyleSheet, Component, PropTypes, View, ScrollView, Image, Text } from 'react-native'
 import ProgressBar from 'ProgressBarAndroid'
 
 import { Icon, Divider, List, Card, Button, COLOR, TYPO  } from 'react-native-material-design'
-
-const Estilos = {
-  divider: {
-    marginTop   : 8,
-    marginBottom: 5
-  }
-}
 
 class Description extends Component {
   constructor(props, context) {
@@ -37,7 +19,6 @@ class Description extends Component {
             image={<Image source={{ uri: url }} />}
             overlay >
             <View style={{ flex: 1 }}>
-              <Text style={[ TYPO.paperFontHeadline, COLOR.paperGrey50 ]}>{title}</Text>
               <Text style={COLOR.paperGrey50}>   País: {pais}</Text>
               <Text style={COLOR.paperGrey50}>   Año: {year}</Text>
             </View>
@@ -49,7 +30,7 @@ class Description extends Component {
               <Text>{plot}</Text>
               <ScrollView>
                 {sources.map((source, index) => (
-                  <View key={index} style={Estilos.divider}>
+                  <View key={index} style={styles.divider}>
                     {index === 0 ? null : <Divider /> }
                     <List
                       primaryText={source.nombre ? source.nombre.split('.torrent')[ 0 ] : 'Desconocido'}
@@ -72,19 +53,14 @@ class Description extends Component {
   }
 
   _handleLoading(source) {
-    const { navigator } = this.context
+    const { Actions } = this.props
 
-    navigator.forward('loading', null, {
-      id  : 2,
-      json: {
+    Actions.loadingVideo({
+      json  : {
         ...source
       }
     })
   }
-}
-
-Description.contextTypes = {
-  navigator: PropTypes.object.isRequired
 }
 
 Description.propTypes = {
@@ -97,5 +73,12 @@ Description.defaultProps = {
   title   : 'cargando...',
   plot    : ''
 }
+
+const styles = StyleSheet.create({
+  divider: {
+    marginTop   : 8,
+    marginBottom: 5
+  }
+})
 
 export default Description

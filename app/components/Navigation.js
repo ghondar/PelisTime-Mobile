@@ -1,5 +1,7 @@
-import React, { Component, PropTypes, View, Text, Image } from 'react-native'
+import React, { Component, PropTypes, StyleSheet, View, Text, Image } from 'react-native'
 import { Avatar, Drawer, Divider, COLOR, TYPO } from 'react-native-material-design'
+
+import { Actions } from 'react-native-router-flux'
 
 const sections = {
   movies : [
@@ -49,12 +51,10 @@ export default class Navigation extends Component {
     }
 
     changeScene(path, name) {
-      const { drawer, navigator } = this.context
-
+      const { drawer } = this.props
       this.setState({
         route: path
       })
-      navigator.to(path, name)
       drawer.closeDrawer()
     }
 
@@ -88,8 +88,7 @@ export default class Navigation extends Component {
     }
 
     _handleChangeView(json) {
-      const { drawer } = this.context
-      const { setView, fetchVideos, videoStore } = this.props
+      const { setView, fetchVideos, videoStore, drawer } = this.props
       setView(json)
 
       if(!videoStore[ json.type + json.view ]) {
@@ -103,16 +102,11 @@ export default class Navigation extends Component {
     }
 }
 
-Navigation.contextTypes = {
-  drawer   : PropTypes.object.isRequired,
-  navigator: PropTypes.object.isRequired
-}
-
-const styles = {
+const styles = StyleSheet.create({
   header: {
     paddingTop: 16
   },
   text  : {
     marginTop: 10
   }
-}
+})

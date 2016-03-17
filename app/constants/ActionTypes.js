@@ -11,3 +11,6 @@ export const SET_DETAIL_STATE = 'SET_DETAIL_STATE'
 
 // Types Actions
 export const SET_VIEW = 'SET_VIEW'
+
+// Drawer Actions
+export const SET_DRAWER = 'SET_DRAWER'

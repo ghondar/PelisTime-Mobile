@@ -1,14 +1,4 @@
-'use strict'
-
-import React, {
-  PropTypes,
-  Component,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Image,
-  View
-} from 'react-native'
+import React, { PropTypes, Component, StyleSheet, Text, TouchableOpacity, Image, View } from 'react-native'
 import { Card, COLOR, TYPO } from 'react-native-material-design'
 
 export default class CardVideo extends Component {
@@ -26,10 +16,7 @@ export default class CardVideo extends Component {
             <Card.Media
               image={<Image
                       source={{ uri: video.cover_url }}
-                      style={{
-                              width : 400,
-                              height: 400
-                            }} />
+                      style={styles.image} />
                     }
               overlay >
               <Text style={[ TYPO.paperFontHeadline, COLOR.paperGrey50 ]}>{video.name}</Text>
@@ -41,12 +28,11 @@ export default class CardVideo extends Component {
   }
 
   _handleDetails(e) {
-    const { video } = this.props
-    const { navigator } = this.context
+    const { video, Actions } = this.props
 
-    navigator.forward('detail', null, {
-      id  : 2,
-      json: {
+    Actions.detailVideo({
+      header:  video.name,
+      json  : {
         id   : video.id,
         title: video.name,
         image: video.cover_url
@@ -55,6 +41,9 @@ export default class CardVideo extends Component {
   }
 }
 
-CardVideo.contextTypes = {
-  navigator: PropTypes.object.isRequired
-}
+const styles = StyleSheet.create({
+  image: {
+    width : 400,
+    height: 400
+  }
+})

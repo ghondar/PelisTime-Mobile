@@ -1,13 +1,7 @@
-'use strict'
-
-import React, {
-  StyleSheet,
-  Component,
-  View,
-  Text
-} from 'react-native'
+import React, { StyleSheet, Component } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Actions } from 'react-native-router-flux'
 import * as videoActions from '../actions/videoActions'
 
 import Description from '../components/Description'
@@ -38,6 +32,7 @@ class DetailVideo extends Component {
       <Description
         url={image || json.image}
         title={title}
+        Actions={Actions}
         {...details} />
     )
   }
