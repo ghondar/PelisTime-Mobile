@@ -1,4 +1,4 @@
-import React, { Component, StyleSheet, Text, ScrollView, PullToRefreshViewAndroid } from 'react-native'
+import React, { Component, StyleSheet, Text, View, ScrollView, PullToRefreshViewAndroid } from 'react-native'
 import ProgressBar from 'ProgressBarAndroid'
 import { Actions } from 'react-native-router-flux'
 
@@ -60,7 +60,7 @@ export default class ListVideo extends Component {
           {videos.map(video => <CardVideo video={video} key={video.id} navigator={navigator} Actions={Actions}/>)}
           {videos.length == 0 && loading && !success ?
             <ProgressBar styleAttr='Inverse' /> :
-            videos.length > 0 ? null : <Text>No se encontro videos...</Text>}
+            videos.length > 0 ? null : <View style={styles.notFound}><Text style={styles.text}>Oops... No se encontro videos</Text></View>}
         </ScrollView>
       </PullToRefreshViewAndroid>
     )
@@ -73,5 +73,13 @@ const styles = StyleSheet.create({
   },
   scrollview: {
     flex: 1
+  },
+  notFound  : {
+    flex          : 1,
+    alignItems    : 'center',
+    justifyContent: 'center'
+  },
+  text      : {
+    fontSize: 16
   }
 })
