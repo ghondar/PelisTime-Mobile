@@ -5,7 +5,7 @@ Versión móvil de [PelisTime](https://github.com/ghondar/PelisTime) creado con 
 
 > This is a work in progress
 
-- [ ] Search
+- [x] Search
 - [x] List
 - [x] Filters
 - [x] Series
