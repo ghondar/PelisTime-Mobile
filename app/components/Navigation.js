@@ -62,13 +62,7 @@ export default class Navigation extends Component {
       const { route } = this.state
 
       return (
-        <Drawer theme='light'>
-          <Drawer.Header image={<Image source={require('./../img/nav.jpg')} />}>
-            <View style={styles.header}>
-              <Avatar size={90} image={<Image source={require('./../img/logo.png')}/>} />
-              <Text style={[ styles.text, COLOR.paperGrey50, TYPO.paperFontHeadline ]}>PelisTime</Text>
-            </View>
-          </Drawer.Header>
+        <Drawer theme='light' width={240}>
           {Object.keys(sections).map((type, i) => (
             <Drawer.Section
               key={i}
@@ -88,8 +82,10 @@ export default class Navigation extends Component {
     }
 
     _handleChangeView(json) {
-      const { setView, fetchVideos, videoStore, drawer } = this.props
+      const { setView, fetchVideos, desactivate, videoStore, drawer } = this.props
       setView(json)
+      Actions.pop(1)
+      desactivate()
 
       if(!videoStore[ json.type + json.view ]) {
         fetchVideos(json, 1)

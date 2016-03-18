@@ -14,3 +14,8 @@ export const SET_VIEW = 'SET_VIEW'
 
 // Drawer Actions
 export const SET_DRAWER = 'SET_DRAWER'
+
+// searchBox Actions
+export const ACTIVATE_SEARCH = 'ACTIVATE_SEARCH'
+export const DESACTIVATE_SEARCH = 'DESACTIVATE_SEARCH'
+export const TOGGLE_SEARCH = 'TOGGLE_SEARCH'

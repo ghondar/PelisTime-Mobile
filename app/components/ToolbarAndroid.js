@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 
 import * as viewActions from '../actions/viewActions'
 import * as videoActions from '../actions/videoActions'
+import * as searchBoxActions from '../actions/searchBoxActions'
 
 import SearchBox from './SearchBox'
 
@@ -54,9 +55,8 @@ class ToolbarAndroid extends Component {
   }
 
   render() {
-    const { onIconPress, videoStore, viewStore, configStore: { color }, drawerStore: { drawer }, routesStore: { name, header }, dispatch } = this.props
-    const { isSearch } = this.state
-
+    const { onIconPress, videoStore, viewStore, configStore: { color }, drawerStore: { drawer }, routesStore: { name, header }, searchBoxStore: { isSearch }, dispatch } = this.props
+    console.log(isSearch)
     return (
       isSearch ?
           <SearchBox
@@ -82,25 +82,26 @@ class ToolbarAndroid extends Component {
   }
 
   _handleSearch() {
-    const { routesStore: { name } } = this.props
+    const { routesStore: { name }, dispatch } = this.props
 
     if(name !== 'listVideo') {
       Actions.pop(1)
     }
-    this.setState({ isSearch: true })
+    dispatch(searchBoxActions.activate())
   }
 
   _handleBackSearch() {
-    this.setState({
-      isSearch: false
-    })
+    const { dispatch } = this.props
+
+    dispatch(searchBoxActions.desactivate())
   }
 }
 
 export default connect(state => ({
-  drawerStore: state.drawerStore,
-  viewStore  : state.viewStore,
-  videoStore : state.videoStore,
-  routesStore: state.routesStore,
-  configStore: state.configStore
+  drawerStore   : state.drawerStore,
+  viewStore     : state.viewStore,
+  videoStore    : state.videoStore,
+  routesStore   : state.routesStore,
+  configStore   : state.configStore,
+  searchBoxStore: state.searchBoxStore
 }))(ToolbarAndroid)

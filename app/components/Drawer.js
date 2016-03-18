@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import * as viewActions from '../actions/viewActions'
 import * as videoActions from '../actions/videoActions'
 import * as drawerActions from '../actions/drawerActions'
+import * as searchBoxActions from '../actions/searchBoxActions'
 
 class Drawer extends Component {
 
@@ -27,7 +28,7 @@ class Drawer extends Component {
   }
 
   render() {
-    const { viewStore, dispatch, videoStore, children, route } = this.props
+    const { viewStore, videoStore, children, route, dispatch } = this.props
     const { drawer } = this.state
 
     return (
@@ -41,6 +42,7 @@ class Drawer extends Component {
                       viewStore= {viewStore}
                       drawer={drawer}
                       {...bindActionCreators(viewActions, dispatch)}
+                      {...bindActionCreators(searchBoxActions, dispatch)}
                       {...bindActionCreators(videoActions, dispatch)}/>
           }
 
