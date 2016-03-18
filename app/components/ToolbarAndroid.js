@@ -46,7 +46,6 @@ class ToolbarAndroid extends Component {
       if(type == 'modal') {
         Actions.dismiss()
       }else {
-        debugger
         Actions.pop()
       }
 
@@ -56,7 +55,7 @@ class ToolbarAndroid extends Component {
 
   render() {
     const { onIconPress, videoStore, viewStore, configStore: { color }, drawerStore: { drawer }, routesStore: { name, header }, searchBoxStore: { isSearch }, dispatch } = this.props
-    console.log(isSearch)
+
     return (
       isSearch ?
           <SearchBox
