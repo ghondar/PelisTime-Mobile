@@ -16,6 +16,8 @@ import com.aerofs.reactnativeautoupdater.ReactNativeAutoUpdater.ReactNativeAutoU
 import com.aerofs.reactnativeautoupdater.ReactNativeAutoUpdaterActivity;
 import com.aerofs.reactnativeautoupdater.ReactNativeAutoUpdaterPackage;
 
+import javax.annotation.Nullable;
+
 public class MainActivity extends ReactNativeAutoUpdaterActivity {
     /**
      *  Name of the JS Bundle file shipped with the app.
