@@ -78,7 +78,7 @@ public class MainActivity extends ReactNativeAutoUpdaterActivity {
      * */
     @Override
     protected ReactNativeAutoUpdaterFrequency getUpdateFrequency() {
-        return ReactNativeAutoUpdaterFrequency.EACH_TIME;
+        return ReactNativeAutoUpdaterFrequency.DAILY;
     }
 
     /**
