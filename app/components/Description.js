@@ -69,7 +69,7 @@ Description.propTypes = {
 }
 
 Description.defaultProps = {
-  url     : require('./../img/welcome.jpg'),
+  url     : 'http://lorempixel.com/600/337/nature/',
   title   : 'cargando...',
   plot    : ''
 }
