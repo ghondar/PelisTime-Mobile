@@ -37,11 +37,11 @@ class ToolbarAndroid extends Component {
   }
 
   _hardwareBackPress() {
-    const { routesStore: { name, type, typeRoute } } = this.props
+    const { routesStore: { name, type, typeRoute }, searchBoxStore: { isSearch } } = this.props
 
     if (name === 'listVideo') {
-      BackAndroid.exitApp()
-      return false
+      isSearch ? this.refs.search._handleIconPress() : BackAndroid.exitApp()
+      return isSearch
     } else {
       if(type == 'modal') {
         Actions.dismiss()
@@ -63,6 +63,7 @@ class ToolbarAndroid extends Component {
             onBack={this._handleBackSearch.bind(this)}
             videoStore={videoStore}
             viewStore={viewStore}
+            ref='search'
             {...bindActionCreators(viewActions, dispatch)}
             {...bindActionCreators(videoActions, dispatch)}/> :
           <Toolbar
