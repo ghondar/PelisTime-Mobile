@@ -60,7 +60,7 @@ class ToolbarAndroid extends Component {
       isSearch ?
           <SearchBox
             color={color}
-            onBack={this._handleBackSearch.bind(this)}
+            onBack={this._handleSearch.bind(this)}
             videoStore={videoStore}
             viewStore={viewStore}
             ref='search'
@@ -87,13 +87,7 @@ class ToolbarAndroid extends Component {
     if(name !== 'listVideo') {
       Actions.pop(1)
     }
-    dispatch(searchBoxActions.activate())
-  }
-
-  _handleBackSearch() {
-    const { dispatch } = this.props
-
-    dispatch(searchBoxActions.desactivate())
+    dispatch(searchBoxActions.toggle())
   }
 }
 
