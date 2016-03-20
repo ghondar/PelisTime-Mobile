@@ -16,10 +16,10 @@ export default class Routes extends Component{
     return (
       <Router hideNavBar={true} >
         <Schema name='modal' sceneConfig={Navigator.SceneConfigs.FloatFromBottomAndroid}/>
-        <Schema name='default' sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
+        <Schema name='default' sceneConfig={Navigator.SceneConfigs.FadeAndroid}/>
         <Schema name='withoutAnimation'/>
 
-        <Route name='principal' initial={true}>
+        <Route name='principal' schema='default' initial={true}>
           <Drawer>
             <Router header={Toolbar} hideNavBar={true}>
               <Route name='listVideo' component={ListVideoContainer}/>
