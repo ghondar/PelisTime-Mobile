@@ -1,11 +1,9 @@
 import React, { StyleSheet, Component, Text } from 'react-native'
 import Modal from 'react-native-modalbox'
 import ProgressBar from 'ProgressBarAndroid'
+import { Actions } from 'react-native-router-flux'
 
-import RCTDeviceEventEmitter from 'RCTDeviceEventEmitter'
-import Subscribable from 'Subscribable'
-import reactMixin from 'react-mixin'
-import { start, prepare, open, stop } from 'react-native-torrent-streamer'
+import { start, open, stop, addEventListener, removeEventListener } from 'react-native-torrent-streamer'
 
 class Loading extends Component {
   constructor(props, context) {
@@ -17,10 +15,10 @@ class Loading extends Component {
   }
 
   componentWillMount() {
-    this.addListenerOn(RCTDeviceEventEmitter, 'error', this.onError)
-    this.addListenerOn(RCTDeviceEventEmitter, 'progress', this.onProgress.bind(this))
-    this.addListenerOn(RCTDeviceEventEmitter, 'ready', this.onReady.bind(this))
-    this.addListenerOn(RCTDeviceEventEmitter, 'stop', this.onStop.bind(this))
+    addEventListener('error', this.onError)
+    addEventListener('progress', this.onProgress.bind(this))
+    addEventListener('ready', this.onReady.bind(this))
+    addEventListener('stop', this.onStop.bind(this))
   }
 
   componentDidMount() {
@@ -29,11 +27,16 @@ class Loading extends Component {
   }
 
   componentWillUnmount() {
+    removeEventListener('error', this.onError)
+    removeEventListener('progress', this.onProgress.bind(this))
+    removeEventListener('ready', this.onReady.bind(this))
+    removeEventListener('stop', this.onStop.bind(this))
     stop()
   }
 
   onError(e) {
     console.log(e)
+    setTimeout(Actions.dismiss, 500)
   }
 
   onProgress(progress) {
@@ -88,4 +91,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default reactMixin.onClass(Loading, Subscribable.Mixin)
+export default Loading
