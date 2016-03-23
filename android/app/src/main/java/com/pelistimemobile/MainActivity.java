@@ -19,6 +19,7 @@ import com.aerofs.reactnativeautoupdater.ReactNativeAutoUpdaterPackage;
 import javax.annotation.Nullable;
 
 public class MainActivity extends ReactNativeAutoUpdaterActivity {
+
     /**
      *  Name of the JS Bundle file shipped with the app.
      *  This file has to be added as an Android Asset.

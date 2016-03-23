@@ -11,7 +11,7 @@ export default function configStore(state = initialState, action = {}) {
     case types.CHANGE:
       return {
         ...state,
-        hex: COLOR[ `${action.color}500` ].color,
+        hex: COLOR[ `${action.color}600` ].color,
         color: action.color
       }
     default:
