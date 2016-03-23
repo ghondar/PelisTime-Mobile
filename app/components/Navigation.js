@@ -1,5 +1,5 @@
 import React, { Component, PropTypes, StyleSheet, View, Text, Image } from 'react-native'
-import { Avatar, Drawer, Divider, COLOR, TYPO } from 'react-native-material-design'
+import { Avatar, Drawer, COLOR, TYPO } from 'react-native-material-design'
 
 import { Actions } from 'react-native-router-flux'
 
@@ -76,7 +76,6 @@ export default class Navigation extends Component {
                 })
               }))}/>
           ))}
-          <Divider style={{ marginTop: 8 }} />
         </Drawer>
       )
     }
