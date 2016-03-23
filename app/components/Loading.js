@@ -61,7 +61,6 @@ class Loading extends Component {
         animationDuration={200}
         swipeThreshold={100}
         style={styles.modal}
-        position={'center'}
         isOpen={true}
         backdropPressToClose={false}
         position='center'>
