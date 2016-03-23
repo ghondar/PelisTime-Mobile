@@ -2,7 +2,7 @@ import * as types from '../constants/ActionTypes'
 import { COLOR } from 'react-native-material-design'
 
 const initialState = {
-  hex  : COLOR[ 'paperBlue500' ].color,
+  hex  : COLOR[ 'paperBlue600' ].color,
   color: 'paperBlue'
 }
 
