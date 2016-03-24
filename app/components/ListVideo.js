@@ -67,7 +67,7 @@ export default class ListVideo extends Component {
     try {
       const orientation = await this.getOrientationPromise()
       setOrientation({
-        width          : SCREEN_WIDTH / (orientation === 'LANDSCAPE' ? 4 : 2),
+        width          : (SCREEN_WIDTH / (orientation === 'LANDSCAPE' ? 4 : 2)) + (orientation === 'LANDSCAPE' ? 1 : 0),
         initOrientation: orientation
       })
     }

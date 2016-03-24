@@ -16,7 +16,7 @@ export default class CardVideo extends Component {
     const { setOrientation, cardVideoStore: { width, initOrientation } } = this.props
     const SCREEN_WIDTH = dimensions.get('window').width
     const SCREEN_HEIGHT = dimensions.get('window').height
-    const newWidth = (orientation === initOrientation ? SCREEN_WIDTH : SCREEN_HEIGHT) / (orientation === 'LANDSCAPE' ? 4 : 2)
+    const newWidth = ((orientation === initOrientation ? SCREEN_WIDTH : SCREEN_HEIGHT) / (orientation === 'LANDSCAPE' ? 4 : 2)) + (orientation === 'LANDSCAPE' ? 1 : 0)
 
     if(width !== newWidth) {
       setOrientation({
