@@ -14,15 +14,12 @@ class Loading extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    const { url } = this.props.json
     addEventListener('error', this.onError)
     addEventListener('progress', this.onProgress.bind(this))
     addEventListener('ready', this.onReady.bind(this))
     addEventListener('stop', this.onStop.bind(this))
-  }
-
-  componentDidMount() {
-    const { url } = this.props.json
     start(url)
   }
 
@@ -68,6 +65,7 @@ class Loading extends Component {
         backdropPressToClose={false}
         position='center'>
         <Text style={styles.text}>Cargando...</Text>
+        <Text style={styles.text}>{progress} %</Text>
         <ProgressBar styleAttr='Horizontal' style={styles.progress} indeterminate={progress == 0 ? true : false} progress={progress / 100} />
       </Modal>
     )
@@ -87,7 +85,7 @@ const styles = StyleSheet.create({
   },
   text    : {
     marginBottom: 10,
-    fontSize    : 15
+    fontSize    : 16
   }
 })
 
