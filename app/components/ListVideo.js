@@ -1,5 +1,7 @@
 import React, { Component, StyleSheet, Text, View, ScrollView, RefreshControl } from 'react-native'
+import { getOrientation } from 'react-native-orientation'
 import ProgressBar from 'ProgressBarAndroid'
+import dimensions from 'Dimensions'
 import { Actions } from 'react-native-router-flux'
 
 import { Card, COLOR, TYPO } from 'react-native-material-design'
@@ -13,6 +15,10 @@ export default class ListVideo extends Component {
     this.state = {
       load: false
     }
+  }
+
+  componentWillMount() {
+    this._getOrientation().done()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,8 +51,34 @@ export default class ListVideo extends Component {
     })
   }
 
+  getOrientationPromise() {
+    return new Promise((resolve, reject) => {
+      getOrientation((err, orientation) => {
+        err ? reject(err) : resolve(orientation)
+      })
+    })
+  }
+
+  async _getOrientation() {
+    const { setOrientation } = this.props
+    const SCREEN_WIDTH = dimensions.get('window').width
+    const SCREEN_HEIGHT = dimensions.get('window').height
+
+    try {
+      const orientation = await this.getOrientationPromise()
+      setOrientation({
+        width          : SCREEN_WIDTH / (orientation === 'LANDSCAPE' ? 3 : 2),
+        initOrientation: orientation
+      })
+    }
+
+    catch (error) {
+      console.log(error)
+    }
+  }
+
   render() {
-    const { videos, loading, success, navigator } = this.props
+    const { videos, loading, success, navigator, cardVideoStore, setOrientation } = this.props
 
     return (
       <RefreshControl style={styles.layout} refreshing={this.state.load} enabled={false}>
@@ -57,7 +89,9 @@ export default class ListVideo extends Component {
           onContentSizeChange={this._onContentResize.bind(this)}
           onScroll={this._onScroll.bind(this)}
           showsVerticalScrollIndicator={false}>
-          {videos.map(video => <CardVideo video={video} key={video.id} navigator={navigator} Actions={Actions}/>)}
+          <View style={styles.view}>
+            {videos.map(video => <CardVideo video={video} cardVideoStore={cardVideoStore} setOrientation={setOrientation} key={video.id} navigator={navigator} Actions={Actions}/>)}
+          </View>
           {videos.length == 0 && loading && !success ?
             <ProgressBar styleAttr='Inverse' /> :
             videos.length > 0 ? null : <View style={styles.notFound}><Text style={styles.text}>Oops... No se encontro videos</Text></View>}
@@ -68,11 +102,16 @@ export default class ListVideo extends Component {
 }
 
 const styles = StyleSheet.create({
+  view      : {
+    flex         : 1,
+    flexWrap     : 'wrap',
+    flexDirection: 'row'
+  },
   layout    : {
     flex     : 1
   },
   scrollview: {
-    flex: 1
+    flex         : 1
   },
   notFound  : {
     flex          : 1,

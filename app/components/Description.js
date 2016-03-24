@@ -17,6 +17,7 @@ class Description extends Component {
         <Card>
           <Card.Media
             image={<Image source={{ uri: url }} />}
+            height={400}
             overlay >
             <View style={{ flex: 1 }}>
               <Text style={COLOR.paperGrey50}>   País: {pais}</Text>

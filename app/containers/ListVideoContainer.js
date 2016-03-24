@@ -2,6 +2,7 @@ import React, { StyleSheet, Component } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as videoActions from '../actions/videoActions'
+import * as cardVideoActions from '../actions/cardVideoActions'
 
 // Custom Components
 import ListVideo from '../components/ListVideo'
@@ -21,7 +22,6 @@ class ListVideoContainer extends Component{
 
   render() {
     const { dispatch, videoStore, viewStore } = this.props
-    const actions = bindActionCreators(videoActions, dispatch)
     const stateVideos = videoStore[ viewStore.type + viewStore.view ]
     let data = {}
 
@@ -46,7 +46,8 @@ class ListVideoContainer extends Component{
     return (
       <ListVideo
           {...data}
-          {...actions}
+          {...bindActionCreators(videoActions, dispatch)}
+          {...bindActionCreators(cardVideoActions, dispatch)}
           {...this.props}/>
     )
   }

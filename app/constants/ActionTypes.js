@@ -19,3 +19,6 @@ export const SET_DRAWER = 'SET_DRAWER'
 export const ACTIVATE_SEARCH = 'ACTIVATE_SEARCH'
 export const DESACTIVATE_SEARCH = 'DESACTIVATE_SEARCH'
 export const TOGGLE_SEARCH = 'TOGGLE_SEARCH'
+
+// cardVideo Actions
+export const SET_ORIENTATION = 'SET_ORIENTATION'

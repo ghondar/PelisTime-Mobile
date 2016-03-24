@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
 import { Actions } from 'react-native-router-flux'
-import * as ActionTypes from '../constants/ActionTypes'
 
 export default function routesStore(state = {
   name       : 'listVideo',
