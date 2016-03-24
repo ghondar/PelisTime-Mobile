@@ -1,17 +1,17 @@
-import * as types from '../constants/ActionTypes'
+import * as ActionTypes from '../constants/ActionTypes'
 import { COLOR } from 'react-native-material-design'
 
 const initialState = {
-  hex  : COLOR[ 'paperBlue600' ].color,
+  hex  : COLOR[ 'paperBlue700' ].color,
   color: 'paperBlue'
 }
 
 export default function configStore(state = initialState, action = {}) {
   switch (action.type) {
-    case types.CHANGE:
+    case ActionTypes.CHANGE:
       return {
         ...state,
-        hex: COLOR[ `${action.color}600` ].color,
+        hex: COLOR[ `${action.color}700` ].color,
         color: action.color
       }
     default:
