@@ -7,13 +7,16 @@ export default class CardVideo extends Component {
   constructor(props, context) {
     super(props, context)
     addOrientationListener(this._orientationDidChange.bind(this))
+    this.state = {
+      load: false
+    }
   }
 
   _orientationDidChange(orientation) {
     const { setOrientation, cardVideoStore: { width, initOrientation } } = this.props
     const SCREEN_WIDTH = dimensions.get('window').width
     const SCREEN_HEIGHT = dimensions.get('window').height
-    const newWidth = (orientation === initOrientation ? SCREEN_WIDTH : SCREEN_HEIGHT) / (orientation === 'LANDSCAPE' ? 3 : 2)
+    const newWidth = (orientation === initOrientation ? SCREEN_WIDTH : SCREEN_HEIGHT) / (orientation === 'LANDSCAPE' ? 4 : 2)
 
     if(width !== newWidth) {
       setOrientation({
@@ -30,9 +33,9 @@ export default class CardVideo extends Component {
         <View style={styles.view}>
           <Image
                 source={{ uri: video.cover_url }}
-                style={[ styles.image, { width,
+                style={[ styles.image, { width: width - 9,
                                          height } ]} />
-          <View style={[ styles.textContainer, { width } ]}>
+          <View style={[ styles.textContainer, { width: width - 6 } ]}>
             <Text style={[ TYPO.paperFontHeadline, COLOR.paperGrey50, styles.text ]} numberOfLines={2}>{video.name}</Text>
             <Text style={[ COLOR.paperGrey400, styles.year ]}>{video.year}</Text>
           </View>
@@ -57,13 +60,15 @@ export default class CardVideo extends Component {
 
 const styles = StyleSheet.create({
   view         : {
-    flex: 1
+    flex           : 1,
+    margin         : 3,
+    borderColor    : 'white',
+    backgroundColor: 'gray'
   },
   textContainer: {
     position       : 'absolute',
     padding        : 10,
     left           : 0,
-    right          : 0,
     bottom         : 0,
     backgroundColor: 'rgba(0,0,0,.3)'
   },
@@ -79,7 +84,6 @@ const styles = StyleSheet.create({
     fontWeight: '100'
   },
   image        : {
-    borderWidth: 0.5,
-    borderColor: 'black'
+    borderWidth: 0
   }
 })
