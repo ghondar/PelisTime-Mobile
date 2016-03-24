@@ -4,11 +4,15 @@ import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 
+import android.content.Intent;
+import android.content.res.Configuration;
+
 import java.util.Arrays;
 import java.util.List;
 
 import com.ghondar.torrentstreamer.TorrentStreamerPackage;
 import me.neo.react.StatusBarPackage;
+import com.github.yamill.orientation.OrientationPackage;
 
 import com.aerofs.reactnativeautoupdater.ReactNativeAutoUpdater;
 import com.aerofs.reactnativeautoupdater.ReactNativeAutoUpdater.ReactNativeAutoUpdaterUpdateType;
@@ -19,6 +23,14 @@ import com.aerofs.reactnativeautoupdater.ReactNativeAutoUpdaterPackage;
 import javax.annotation.Nullable;
 
 public class MainActivity extends ReactNativeAutoUpdaterActivity {
+
+    @Override
+     public void onConfigurationChanged(Configuration newConfig) {
+         super.onConfigurationChanged(newConfig);
+         Intent intent = new Intent("onConfigurationChanged");
+         intent.putExtra("newConfig", newConfig);
+         this.sendBroadcast(intent);
+     }
 
     /**
      *  Name of the JS Bundle file shipped with the app.
@@ -118,7 +130,8 @@ public class MainActivity extends ReactNativeAutoUpdaterActivity {
             new ReactNativeAutoUpdaterPackage(),
             new MainReactPackage(),
             new TorrentStreamerPackage(),
-            new StatusBarPackage(this)
+            new StatusBarPackage(this),
+            new OrientationPackage(this)
         );
     }
 }

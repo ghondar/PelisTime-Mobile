@@ -16,6 +16,7 @@
     "react-native-auto-updater": "ghondar/react-native-auto-updater",
     "react-native-material-design": "ghondar/react-native-material-design",
     "react-native-modalbox": "1.3.1",
+    "react-native-orientation": "^1.15.0",
     "react-native-router-flux": "2.3.13",
     "react-native-torrent-streamer": "0.0.5",
     "react-redux": "4.4.1",
