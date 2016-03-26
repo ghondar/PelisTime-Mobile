@@ -1,6 +1,6 @@
 {
   "name": "PelisTimeMobile",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "scripts": {
     "start": "node_modules/react-native/packager/packager.sh",
     "clear": "npm run step1; npm run step2",
