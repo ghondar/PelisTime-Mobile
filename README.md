@@ -3,14 +3,12 @@ Versión móvil de [PelisTime](https://github.com/ghondar/PelisTime) creado con 
 
 ![](https://media.giphy.com/media/xThuW8G88DQFNREbf2/giphy.gif)
 
-> This is a work in progress
-
 - [x] Search
 - [x] List
 - [x] Filters
 - [x] Series
 - [x] Torrent download and streaming
-- [ ] Player
+- [x] Player
 
 ## Setup
 ```shell
