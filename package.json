@@ -19,6 +19,7 @@
     "react-native-orientation": "^1.15.0",
     "react-native-router-flux": "2.3.13",
     "react-native-torrent-streamer": "0.0.5",
+    "react-native-vlc-player": "0.0.2",
     "react-redux": "4.4.1",
     "redux": "3.3.1",
     "redux-thunk": "2.0.1",

@@ -131,4 +131,5 @@ dependencies {
     compile project(':react-native-android-statusbar')
     compile project(':ReactNativeAutoUpdater')
     compile project(':Orientation')
+    compile project(':react-native-vlc-player')
 }

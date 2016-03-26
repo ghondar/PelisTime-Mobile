@@ -1,6 +1,7 @@
 import React, { StyleSheet, Component, Text } from 'react-native'
 import Modal from 'react-native-modalbox'
 import ProgressBar from 'ProgressBarAndroid'
+import { play } from 'react-native-vlc-player'
 import { Actions } from 'react-native-router-flux'
 
 import { start, open, stop, addEventListener, removeEventListener } from 'react-native-torrent-streamer'
@@ -46,7 +47,7 @@ class Loading extends Component {
   }
 
   onReady(data) {
-    open(data.url, 'video/mp4')
+    play(data.url)
   }
 
   onStop(data) {

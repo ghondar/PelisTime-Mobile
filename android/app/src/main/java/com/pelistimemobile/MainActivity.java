@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.ghondar.torrentstreamer.TorrentStreamerPackage;
+import com.ghondar.vlcplayer.VLCPlayerPackage;
 import me.neo.react.StatusBarPackage;
 import com.github.yamill.orientation.OrientationPackage;
 
@@ -130,6 +131,7 @@ public class MainActivity extends ReactNativeAutoUpdaterActivity {
             new ReactNativeAutoUpdaterPackage(),
             new MainReactPackage(),
             new TorrentStreamerPackage(),
+            new VLCPlayerPackage(),
             new StatusBarPackage(this),
             new OrientationPackage(this)
         );
