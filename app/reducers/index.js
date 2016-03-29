@@ -1,8 +1,22 @@
-export { default as videoStore } from './videoStore'
-export { default as detailStore } from './detailStore'
-export { default as viewStore } from './viewStore'
-export { default as drawerStore } from './drawerStore'
-export { default as routesStore } from './routesStore'
-export { default as configStore } from './configStore'
-export { default as searchBoxStore } from './searchBoxStore'
-export { default as cardVideoStore } from './cardVideoStore'
+import { combineReducers } from 'redux'
+import videoStore from './videoStore'
+import detailStore from './detailStore'
+import viewStore from './viewStore'
+import drawerStore from './drawerStore'
+import routesStore from './routesStore'
+import configStore from './configStore'
+import searchBoxStore from './searchBoxStore'
+import cardVideoStore from './cardVideoStore'
+
+const pelisTimeApp = combineReducers({
+  videoStore,
+  detailStore,
+  viewStore,
+  drawerStore,
+  routesStore,
+  configStore,
+  searchBoxStore,
+  cardVideoStore
+})
+
+export default pelisTimeApp
